@@ -108,14 +108,11 @@
       opacity: 1;
     }
 
-    /* Grid Layout */
-    .profile { grid-column: span 8; }
-    .main-viz { grid-column: span 4; grid-row: span 2; }
-    .skill-1 { grid-column: span 4; }
-    .skill-2 { grid-column: span 4; }
-    .skill-3 { grid-column: span 4; }
-    .skill-4 { grid-column: span 4; }
-    .objectives { grid-column: span 8; }
+    .profile { grid-column: span 12; }
+    .radar-viz { grid-column: span 6; min-height: 500px; }
+    .flow-viz { grid-column: span 6; min-height: 500px; }
+    .skill-detail { grid-column: span 6; }
+    .objectives { grid-column: span 12; }
 
     .card-title {
       font-size: 18px;
@@ -137,71 +134,234 @@
       line-height: 1.6;
     }
 
-    /* Circular Progress */
-    .circular-progress {
-      position: relative;
-      width: 120px;
-      height: 120px;
-      margin: 20px auto;
-    }
-
-    .circular-progress svg {
-      transform: rotate(-90deg);
-    }
-
-    .circular-progress circle {
-      fill: none;
-      stroke-width: 8;
-    }
-
-    .circle-bg {
-      stroke: rgba(255, 255, 255, 0.05);
-    }
-
-    .circle-progress {
-      stroke-linecap: round;
-      transition: stroke-dashoffset 1s ease;
-    }
-
-    .progress-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 28px;
-      font-weight: 700;
-      color: #fff;
-    }
-
-    /* Bar Chart */
-    .bar-chart {
-      margin-top: 20px;
-    }
-
-    .bar-item {
-      margin-bottom: 16px;
-    }
-
-    .bar-label {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 6px;
+    .card-subtitle {
       font-size: 13px;
       color: #9ca3af;
+      margin-bottom: 20px;
+      font-style: italic;
     }
 
-    .bar-bg {
-      height: 8px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
-      overflow: hidden;
+    /* Radar Chart */
+    .radar-container {
+      width: 100%;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
     }
 
-    .bar-fill {
-      height: 100%;
-      border-radius: 10px;
-      transition: width 1s ease;
-      background: linear-gradient(90deg, var(--accent2), var(--accent1));
+    #radarCanvas {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    /* Flow Network - Schéma Simple et Clair */
+    .flow-container {
+      width: 100%;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .flow-center-simple {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(168, 85, 247, 0.1));
+      border: 3px solid #a855f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      box-shadow: 0 4px 20px rgba(168, 85, 247, 0.3);
+    }
+
+    .flow-center-icon {
+      font-size: 32px;
+      margin-bottom: 5px;
+    }
+
+    .synergies-simple {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .synergy-simple-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 2px solid;
+      border-radius: 16px;
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .synergy-simple-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .synergy-simple-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .synergy-simple-skills {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .skill-simple-badge {
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid;
+    }
+
+    .synergy-simple-arrow {
+      font-size: 20px;
+      color: #9ca3af;
+      margin: 0 4px;
+    }
+
+    .synergy-simple-title {
+      font-weight: 700;
+      font-size: 15px;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .synergy-simple-desc {
+      font-size: 13px;
+      color: #9ca3af;
+      line-height: 1.5;
+    }
+
+    /* Couleurs des cartes */
+    .synergy-card-1 {
+      border-color: #06b6d4;
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.05), rgba(16, 185, 129, 0.05));
+    }
+
+    .synergy-card-2 {
+      border-color: #10b981;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(168, 85, 247, 0.05));
+    }
+
+    .synergy-card-3 {
+      border-color: #a855f7;
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.05), rgba(6, 182, 212, 0.05));
+    }
+
+    .synergy-card-4 {
+      border-color: #f59e0b;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(16, 185, 129, 0.05));
+    }
+
+    .synergy-card-5 {
+      border-color: #ef4444;
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(6, 182, 212, 0.05));
+    }
+
+    @media (max-width: 768px) {
+      .synergies-simple {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Skill Detail Cards */
+    .skill-list {
+      margin-top: 16px;
+    }
+
+    .skill-item {
+      margin-bottom: 20px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      border-left: 3px solid;
+    }
+
+    .skill-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .skill-item-title {
+      font-weight: 600;
+      color: #fff;
+      font-size: 15px;
+    }
+
+    .skill-level {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .level-initie {
+      background: rgba(239, 68, 68, 0.15);
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .level-intermediaire {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fcd34d;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .level-avance {
+      background: rgba(6, 182, 212, 0.15);
+      color: #67e8f9;
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }
+
+    .level-expert {
+      background: rgba(16, 185, 129, 0.15);
+      color: #6ee7b7;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .skill-item-desc {
+      font-size: 13px;
+      color: #9ca3af;
+      line-height: 1.5;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .skill-tag {
+      font-size: 11px;
+      padding: 4px 8px;
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      border-radius: 6px;
+      color: #c4b5fd;
     }
 
     /* Pills */
@@ -227,57 +387,52 @@
       border-color: rgba(168, 85, 247, 0.5);
     }
 
-    /* Main Visualization */
-    .viz-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      height: 100%;
-      justify-content: center;
-    }
-
-    .concentric-circles {
-      position: relative;
-      width: 280px;
-      height: 280px;
-      margin: 20px auto;
-    }
-
-    .concentric-circles svg {
-      transform: rotate(0deg);
-    }
-
-    .legend {
-      width: 100%;
-      margin-top: 20px;
-    }
-
-    .legend-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 12px;
-      margin-bottom: 8px;
+    /* Objectives */
+    .objective-item {
+      margin-bottom: 24px;
+      padding: 20px;
       background: rgba(255, 255, 255, 0.03);
-      border-radius: 8px;
-      font-size: 12px;
-      transition: background 0.3s ease;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .legend-item:hover {
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    .legend-left {
+    .objective-header {
       display: flex;
       align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .objective-icon {
+      font-size: 28px;
+    }
+
+    .objective-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .objective-desc {
+      font-size: 13px;
+      color: #9ca3af;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .objective-actions {
+      display: flex;
+      flex-wrap: wrap;
       gap: 8px;
     }
 
-    .legend-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
+    .action-tag {
+      font-size: 11px;
+      padding: 6px 12px;
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      border-radius: 8px;
+      color: #67e8f9;
     }
 
     /* Modal */
@@ -305,7 +460,7 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 24px;
       padding: 32px;
-      max-width: 600px;
+      max-width: 700px;
       width: 90%;
       max-height: 80vh;
       overflow-y: auto;
@@ -359,21 +514,7 @@
     }
 
     .modal-body ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .modal-body li {
-      padding: 8px 0;
-      padding-left: 20px;
-      position: relative;
-    }
-
-    .modal-body li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--accent2);
+      margin: 10px 0;
     }
 
     footer {
@@ -388,17 +529,16 @@
       .dashboard {
         grid-template-columns: repeat(8, 1fr);
       }
-      .profile { grid-column: span 8; }
-      .main-viz { grid-column: span 8; grid-row: span 1; }
-      .skill-1, .skill-2, .skill-3, .skill-4 { grid-column: span 4; }
-      .objectives { grid-column: span 8; }
+      .profile, .objectives { grid-column: span 8; }
+      .radar-viz, .flow-viz { grid-column: span 8; }
+      .skill-detail { grid-column: span 8; }
     }
 
     @media (max-width: 640px) {
       .dashboard {
         grid-template-columns: 1fr;
       }
-      .profile, .main-viz, .skill-1, .skill-2, .skill-3, .skill-4, .objectives {
+      .profile, .radar-viz, .flow-viz, .skill-detail, .objectives {
         grid-column: span 1;
       }
     }
@@ -406,150 +546,238 @@
 </head>
 <body>
   <header>
-    <h1>✨ Ma Pile de Compétences ✨</h1>
-    <p class="lead">Une exploration visuelle et inspirée du concept de <strong>Skill Stack</strong> de Tomas Pueyo</p>
+    <h1>✨ Mon Profil de Compétences Unique ✨</h1>
+    <p class="lead">Exploration des synergies et croisements entre mes compétences – Inspiré de <strong>Tomas Pueyo</strong></p>
   </header>
 
   <div class="dashboard">
     <!-- Profile Card -->
-    <div class="card profile" onclick="openModal('profile')">
+    <div class="card profile">
       <h2 class="card-title">
         <span class="card-icon">🌟</span>
-        Profil Général
+        Mon Positionnement Unique
       </h2>
       <div class="card-content">
-        <p>Créative et curieuse, je construis un parcours mêlant design, technologie et imagination. Mon objectif : façonner une synergie de compétences qui amplifie mon impact.</p>
+        <p>Designer-développeuse hybride, je me positionne à l'intersection de la création visuelle, du développement web et de l'UX design. Ma force réside dans ma capacité à concevoir ET réaliser des expériences numériques complètes, en comprenant à la fois les enjeux utilisateurs, créatifs et techniques.</p>
         <div class="pills">
-          <span class="pill">🎯 Organisée</span>
-          <span class="pill">🎨 Créative</span>
-          <span class="pill">💡 Innovante</span>
+          <span class="pill">🎯 Vision transversale</span>
+          <span class="pill">🔧 Conception + Réalisation</span>
+          <span class="pill">💡 Créativité technique</span>
+          <span class="pill">🎭 Approche humaine</span>
         </div>
       </div>
     </div>
 
-    <!-- Main Visualization -->
-    <div class="card main-viz">
+    <!-- Radar Chart -->
+    <div class="card radar-viz">
       <h2 class="card-title">
-        <span class="card-icon">📊</span>
-        Vue d'ensemble
+        <span class="card-icon">🎯</span>
+        Équilibre Pluridisciplinaire
       </h2>
-      <div class="viz-container">
-        <div class="concentric-circles" id="viz"></div>
-        <div class="legend" id="legend"></div>
+      <p class="card-subtitle">Mon profil équilibré à travers 5 domaines de compétences</p>
+      <div class="radar-container">
+        <canvas id="radarCanvas" width="400" height="400"></canvas>
       </div>
     </div>
 
-    <!-- Skill Cards -->
-    <div class="card skill-1" onclick="openModal('visual')">
+    <!-- Flow Network -->
+    <div class="card flow-viz">
       <h2 class="card-title">
-        <span class="card-icon">🎥</span>
-        Création Visuelle
+        <span class="card-icon">🔗</span>
+        Réseau de Synergies
       </h2>
-      <div class="circular-progress">
-        <svg width="120" height="120">
-          <circle class="circle-bg" cx="60" cy="60" r="52"></circle>
-          <circle class="circle-progress" cx="60" cy="60" r="52" 
-            stroke="#a855f7" 
-            stroke-dasharray="326.73" 
-            stroke-dashoffset="48.51"
-            style="animation: fillCircle 1.5s ease forwards;">
-          </circle>
-        </svg>
-        <div class="progress-text">65%</div>
+      <p class="card-subtitle">Comment mes compétences s'enrichissent mutuellement</p>
+      <div class="flow-container" id="flowContainer">
+        <!-- Généré par JS -->
       </div>
     </div>
 
-    <div class="card skill-2" onclick="openModal('web')">
+    <!-- Skill Detail Cards -->
+    <div class="card skill-detail" onclick="openSkillModal('web')">
       <h2 class="card-title">
         <span class="card-icon">💻</span>
         Développement Web
       </h2>
-      <div class="circular-progress">
-        <svg width="120" height="120">
-          <circle class="circle-bg" cx="60" cy="60" r="52"></circle>
-          <circle class="circle-progress" cx="60" cy="60" r="52" 
-            stroke="#06b6d4" 
-            stroke-dasharray="326.73" 
-            stroke-dashoffset="81.68"
-            style="animation: fillCircle 1.5s ease forwards;">
-          </circle>
-        </svg>
-        <div class="progress-text">75%</div>
+      <div class="skill-list">
+        <div class="skill-item" style="border-color: #06b6d4;">
+          <div class="skill-item-header">
+            <span class="skill-item-title">Intégration Front-End</span>
+            <span class="skill-level level-avance">Avancé</span>
+          </div>
+          <p class="skill-item-desc">Transformation de maquettes Figma en interfaces responsives et accessibles</p>
+          <div class="skill-tags">
+            <span class="skill-tag">HTML5/CSS3</span>
+            <span class="skill-tag">JavaScript ES6+</span>
+            <span class="skill-tag">Responsive Design</span>
+          </div>
+        </div>
+
+        <div class="skill-item" style="border-color: #06b6d4;">
+          <div class="skill-item-header">
+            <span class="skill-item-title">Frameworks Modernes</span>
+            <span class="skill-level level-intermediaire">Intermédiaire</span>
+          </div>
+          <p class="skill-item-desc">Développement d'applications interactives avec React</p>
+          <div class="skill-tags">
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">Hooks</span>
+            <span class="skill-tag">State Management</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="card skill-3" onclick="openModal('ux')">
+    <div class="card skill-detail" onclick="openSkillModal('ux')">
       <h2 class="card-title">
         <span class="card-icon">🎨</span>
-        UX Design & Figma
+        UX/UI Design
       </h2>
-      <div class="circular-progress">
-        <svg width="120" height="120">
-          <circle class="circle-bg" cx="60" cy="60" r="52"></circle>
-          <circle class="circle-progress" cx="60" cy="60" r="52" 
-            stroke="#10b981" 
-            stroke-dasharray="326.73" 
-            stroke-dashoffset="130.69"
-            style="animation: fillCircle 1.5s ease forwards;">
-          </circle>
-        </svg>
-        <div class="progress-text">60%</div>
+      <div class="skill-list">
+        <div class="skill-item" style="border-color: #10b981;">
+          <div class="skill-item-header">
+            <span class="skill-item-title">Conception d'interfaces</span>
+            <span class="skill-level level-avance">Avancé</span>
+          </div>
+          <p class="skill-item-desc">Design de wireframes, prototypes et maquettes haute-fidélité sur Figma</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Figma</span>
+            <span class="skill-tag">Design Systems</span>
+            <span class="skill-tag">Prototypage</span>
+          </div>
+        </div>
+
+        <div class="skill-item" style="border-color: #10b981;">
+          <div class="skill-item-header">
+            <span class="skill-item-title">Recherche Utilisateur</span>
+            <span class="skill-level level-intermediaire">Intermédiaire</span>
+          </div>
+          <p class="skill-item-desc">Création de personas, user journeys et tests utilisateurs</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Personas</span>
+            <span class="skill-tag">User Journeys</span>
+            <span class="skill-tag">Testing</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="card skill-4" onclick="openModal('soft')">
+    <div class="card skill-detail" onclick="openSkillModal('visual')">
+      <h2 class="card-title">
+        <span class="card-icon">🎥</span>
+        Création Visuelle & Audiovisuelle
+      </h2>
+      <div class="skill-list">
+        <div class="skill-item" style="border-color: #a855f7;">
+          <div class="skill-item-header">
+            <span class="skill-item-title">Montage Vidéo</span>
+            <span class="skill-level level-avance">Avancé</span>
+          </div>
+          <p class="skill-item-desc">Montage, étalonnage et post-production vidéo professionnelle</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Premiere Pro</span>
+            <span class="skill-tag">DaVinci Resolve</span>
+            <span class="skill-tag">Storytelling</span>
+          </div>
+        </div>
+
+        <div class="skill-item" style="border-color: #a855f7;">
+          <div class="skill-item-header">
+            <span class="skill-item-title">Motion Design</span>
+            <span class="skill-level level-intermediaire">Intermédiaire</span>
+          </div>
+          <p class="skill-item-desc">Création d'animations et d'effets visuels pour interfaces et vidéos</p>
+          <div class="skill-tags">
+            <span class="skill-tag">After Effects</span>
+            <span class="skill-tag">Animations UI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card skill-detail" onclick="openSkillModal('soft')">
       <h2 class="card-title">
         <span class="card-icon">🪄</span>
-        Soft Skills & Hobbies
+        Compétences Transversales
       </h2>
-      <div class="circular-progress">
-        <svg width="120" height="120">
-          <circle class="circle-bg" cx="60" cy="60" r="52"></circle>
-          <circle class="circle-progress" cx="60" cy="60" r="52" 
-            stroke="#f59e0b" 
-            stroke-dasharray="326.73" 
-            stroke-dashoffset="98.02"
-            style="animation: fillCircle 1.5s ease forwards;">
-          </circle>
-        </svg>
-        <div class="progress-text">70%</div>
+      <div class="skill-list">
+        <div class="skill-item" style="border-color: #f59e0b;">
+          <div class="skill-item-header">
+            <span class="skill-item-title">Communication & Présentation</span>
+            <span class="skill-level level-avance">Avancé</span>
+          </div>
+          <p class="skill-item-desc">Capacité à présenter et défendre mes projets (théâtre)</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Prise de parole</span>
+            <span class="skill-tag">Storytelling</span>
+            <span class="skill-tag">Vulgarisation</span>
+          </div>
+        </div>
+
+        <div class="skill-item" style="border-color: #f59e0b;">
+          <div class="skill-item-header">
+            <span class="skill-item-title">Résolution de Problèmes</span>
+            <span class="skill-level level-avance">Avancé</span>
+          </div>
+          <p class="skill-item-desc">Approche analytique et créative (escalade, NSI)</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Logique</span>
+            <span class="skill-tag">Persévérance</span>
+            <span class="skill-tag">Adaptabilité</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Objectives Card -->
-    <div class="card objectives" onclick="openModal('objectives')">
+    <!-- Objectives -->
+    <div class="card objectives">
       <h2 class="card-title">
         <span class="card-icon">🚀</span>
-        Objectifs
+        Axes de Développement
       </h2>
-      <div class="bar-chart">
-        <div class="bar-item">
-          <div class="bar-label">
-            <span>🌍 Anglais Professionnel</span>
-            <span>40%</span>
-          </div>
-          <div class="bar-bg">
-            <div class="bar-fill" style="width: 0%; --final-width: 40%; animation: fillBar 1.5s ease forwards;"></div>
-          </div>
+      
+      <div class="objective-item">
+        <div class="objective-header">
+          <span class="objective-icon">🌍</span>
+          <span class="objective-title">Anglais Professionnel</span>
         </div>
-        
-        <div class="bar-item">
-          <div class="bar-label">
-            <span>🎬 Projets Immersifs</span>
-            <span>80%</span>
-          </div>
-          <div class="bar-bg">
-            <div class="bar-fill" style="width: 0%; --final-width: 80%; animation: fillBar 1.5s ease 0.4s forwards;"></div>
-          </div>
+        <p class="objective-desc">
+          <strong>Niveau actuel :</strong> A2-B1 (compréhension correcte, expression limitée)<br>
+          <strong>Objectif :</strong> Atteindre B2 confirmé d'ici la fin de mes études pour pouvoir travailler en contexte international, lire la documentation technique en anglais et communiquer efficacement avec des équipes multiculturelles.
+        </p>
+        <div class="objective-actions">
+          <span class="action-tag">Cours intensifs</span>
+          <span class="action-tag">Projets internationaux</span>
+          <span class="action-tag">Certifications</span>
         </div>
-        <div class="bar-item">
-          <div class="bar-label">
-            <span>💼 Profil Stratégique</span>
-            <span>60%</span>
-          </div>
-          <div class="bar-bg">
-            <div class="bar-fill" style="width: 0%; --final-width: 60%; animation: fillBar 1.5s ease 0.6s forwards;"></div>
-          </div>
+      </div>
+
+      <div class="objective-item">
+        <div class="objective-header">
+          <span class="objective-icon">🤖</span>
+          <span class="objective-title">IA & Design Génératif</span>
+        </div>
+        <p class="objective-desc">
+          <strong>Compétences visées :</strong> Apprendre à intégrer l'IA dans mes workflows de design et développement, créer des interfaces conversationnelles, comprendre les enjeux éthiques de l'IA dans le design. Développer des projets de co-création homme-machine.
+        </p>
+        <div class="objective-actions">
+          <span class="action-tag">Interfaces conversationnelles</span>
+          <span class="action-tag">Outils IA-design</span>
+          <span class="action-tag">Éthique & IA</span>
+        </div>
+      </div>
+
+      <div class="objective-item">
+        <div class="objective-header">
+          <span class="objective-icon">🎬</span>
+          <span class="objective-title">Expériences Immersives</span>
+        </div>
+        <p class="objective-desc">
+          <strong>Direction future :</strong> Me spécialiser dans la création d'expériences immersives mêlant audiovisuel, interactivité et narration. Explorer la VR/AR, les installations interactives et les expériences transmédias. Combiner mes compétences en design, dev et vidéo pour créer des projets innovants.
+        </p>
+        <div class="objective-actions">
+          <span class="action-tag">XR (VR/AR)</span>
+          <span class="action-tag">Installations interactives</span>
+          <span class="action-tag">Narration transmédia</span>
         </div>
       </div>
     </div>
@@ -567,243 +795,323 @@
     © Lucie Trinquart – Diagnostic de compétences | Inspiré de <em>Tomas Pueyo</em>
   </footer>
 
-  <style>
-    @keyframes fillBar {
-      to {
-        width: var(--final-width);
-      }
-    }
-
-    @keyframes fillCircle {
-      from {
-        stroke-dashoffset: 326.73;
-      }
-    }
-  </style>
-
   <script>
-    // Data
-    const data = [
-      { name: 'Création visuelle & Audiovisuel', value: 65, color: '#a855f7' },
-      { name: 'Développement Web', value: 75, color: '#06b6d4' },
-      { name: 'UX Design & Figma', value: 60, color: '#10b981' },
-      { name: 'Soft Skills & Hobbies', value: 70, color: '#f59e0b' },
-      { name: 'Anglais', value: 10, color: '#ef4444' }
-    ];
+    // ===== RADAR CHART =====
+    function drawRadarChart() {
+      const canvas = document.getElementById('radarCanvas');
+      const ctx = canvas.getContext('2d');
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+      const maxRadius = 150;
 
-    // Create concentric circles visualization
-    const svgSize = 280;
-    const cx = svgSize / 2;
-    const cy = svgSize / 2;
-    const baseRadius = 120;
-    const strokeWidth = 14;
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    let svg = `<svg viewBox='0 0 ${svgSize} ${svgSize}' xmlns='http://www.w3.org/2000/svg'>`;
+      // Data (sur 5 niveaux de maîtrise)
+      const skills = [
+        { name: 'Dev Web', value: 4, color: '#06b6d4' },
+        { name: 'UX/UI Design', value: 4, color: '#10b981' },
+        { name: 'Création Visuelle', value: 4, color: '#a855f7' },
+        { name: 'Soft Skills', value: 4, color: '#f59e0b' },
+        { name: 'Anglais', value: 2, color: '#ef4444' }
+      ];
 
-    data.forEach((d, i) => {
-      const r = baseRadius - i * 22;
-      const circumference = 2 * Math.PI * r;
-      const offset = circumference * (1 - d.value / 100);
+      const numPoints = skills.length;
+      const angleStep = (Math.PI * 2) / numPoints;
 
-      svg += `
-        <circle cx='${cx}' cy='${cy}' r='${r}' stroke='rgba(255,255,255,0.03)' stroke-width='${strokeWidth}' fill='none'/>
-        <circle cx='${cx}' cy='${cy}' r='${r}' stroke='${d.color}' stroke-width='${strokeWidth}' fill='none'
-          stroke-dasharray='${circumference}' stroke-dashoffset='${circumference}' stroke-linecap='round'
-          style='animation: drawCircle${i} 1.5s ease ${i * 0.2}s forwards;'/>
-        <style>
-          @keyframes drawCircle${i} {
-            to { stroke-dashoffset: ${offset}; }
-          }
-        </style>
-      `;
-    });
+      // Draw background circles
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+      ctx.lineWidth = 1;
+      for (let i = 1; i <= 5; i++) {
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, (maxRadius / 5) * i, 0, Math.PI * 2);
+        ctx.stroke();
+      }
 
-    svg += `</svg>`;
-    document.getElementById('viz').innerHTML = svg;
+      // Draw axes
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+      ctx.lineWidth = 1;
+      for (let i = 0; i < numPoints; i++) {
+        const angle = angleStep * i - Math.PI / 2;
+        const x = centerX + Math.cos(angle) * maxRadius;
+        const y = centerY + Math.sin(angle) * maxRadius;
+        
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+      }
 
-    // Create legend
-    const legendEl = document.getElementById('legend');
-    data.forEach(d => {
-      const el = document.createElement('div');
-      el.className = 'legend-item';
-      el.innerHTML = `
-        <div class="legend-left">
-          <span class='legend-dot' style='background:${d.color}'></span>
-          <span>${d.name}</span>
-        </div>
-        <span style="font-weight: 600; color: ${d.color}">${d.value}%</span>
-      `;
-      legendEl.appendChild(el);
-    });
+      // Draw data polygon
+      ctx.beginPath();
+      ctx.strokeStyle = '#a855f7';
+      ctx.fillStyle = 'rgba(168, 85, 247, 0.2)';
+      ctx.lineWidth = 2;
 
-    // Modal content
+      for (let i = 0; i < numPoints; i++) {
+        const angle = angleStep * i - Math.PI / 2;
+        const radius = (skills[i].value / 5) * maxRadius;
+        const x = centerX + Math.cos(angle) * radius;
+        const y = centerY + Math.sin(angle) * radius;
+        
+        if (i === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+
+        // Draw point
+        ctx.save();
+        ctx.fillStyle = skills[i].color;
+        ctx.beginPath();
+        ctx.arc(x, y, 6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      // Draw labels
+      ctx.font = '14px Poppins';
+      ctx.fillStyle = '#f3f4f6';
+      ctx.textAlign = 'center';
+
+      for (let i = 0; i < numPoints; i++) {
+        const angle = angleStep * i - Math.PI / 2;
+        const labelRadius = maxRadius + 40;
+        const x = centerX + Math.cos(angle) * labelRadius;
+        const y = centerY + Math.sin(angle) * labelRadius;
+        
+        ctx.fillText(skills[i].name, x, y);
+      }
+    }
+
+    // ===== FLOW NETWORK - Schéma Simple et Clair =====
+    function createFlowNetwork() {
+      const container = document.getElementById('flowContainer');
+      container.innerHTML = '';
+
+      // Center circle "MOI"
+      const centerDiv = document.createElement('div');
+      centerDiv.className = 'flow-center-simple';
+      centerDiv.innerHTML = '<div class="flow-center-icon">🌟</div><div>MOI</div>';
+      container.appendChild(centerDiv);
+
+      // Synergies data
+      const synergies = [
+        {
+          skill1: { name: 'Dev Web', color: '#06b6d4' },
+          skill2: { name: 'UX Design', color: '#10b981' },
+          title: 'Prototypes Fonctionnels',
+          desc: 'Je transforme rapidement des concepts UX en prototypes codés, accélérant les tests utilisateurs.',
+          cardClass: 'synergy-card-1'
+        },
+        {
+          skill1: { name: 'UX Design', color: '#10b981' },
+          skill2: { name: 'Création Visuelle', color: '#a855f7' },
+          title: 'Interfaces Narratives',
+          desc: 'J\'intègre storytelling visuel et animations pour créer des expériences engageantes.',
+          cardClass: 'synergy-card-2'
+        },
+        {
+          skill1: { name: 'Création Visuelle', color: '#a855f7' },
+          skill2: { name: 'Dev Web', color: '#06b6d4' },
+          title: 'Expériences Web Immersives',
+          desc: 'Je combine vidéo, animation et code pour créer des sites visuellement riches et interactifs.',
+          cardClass: 'synergy-card-3'
+        },
+        {
+          skill1: { name: 'Soft Skills', color: '#f59e0b' },
+          skill2: { name: 'UX Design', color: '#10b981' },
+          title: 'Design Empathique',
+          desc: 'Mon expérience en théâtre m\'aide à mieux comprendre les utilisateurs et leurs besoins.',
+          cardClass: 'synergy-card-4'
+        },
+        {
+          skill1: { name: 'Soft Skills', color: '#f59e0b' },
+          skill2: { name: 'Dev Web', color: '#06b6d4' },
+          title: 'Communication Technique',
+          desc: 'Je facilite la collaboration entre designers et développeurs grâce à ma communication claire.',
+          cardClass: 'synergy-card-5'
+        }
+      ];
+
+      // Create grid
+      const grid = document.createElement('div');
+      grid.className = 'synergies-simple';
+
+      synergies.forEach(syn => {
+        const card = document.createElement('div');
+        card.className = `synergy-simple-card ${syn.cardClass}`;
+
+        card.innerHTML = `
+          <div class="synergy-simple-header">
+            <div class="synergy-simple-skills">
+              <span class="skill-simple-badge" style="background: ${syn.skill1.color}20; color: ${syn.skill1.color}; border-color: ${syn.skill1.color};">
+                ${syn.skill1.name}
+              </span>
+              <span class="synergy-simple-arrow">→</span>
+              <span class="skill-simple-badge" style="background: ${syn.skill2.color}20; color: ${syn.skill2.color}; border-color: ${syn.skill2.color};">
+                ${syn.skill2.name}
+              </span>
+            </div>
+          </div>
+          <div class="synergy-simple-title">${syn.title}</div>
+          <div class="synergy-simple-desc">${syn.desc}</div>
+        `;
+
+        grid.appendChild(card);
+      });
+
+      container.appendChild(grid);
+    }
+
+    // ===== MODAL CONTENT =====
     const modalContent = {
-      profile: {
-        title: '🌟 Profil Général',
-        content: `
-          <h3>Qui suis-je ?</h3>
-          <p>Lucie Trinquart, Après avoir fait un abc spécialilité: NSI(numérique et science informatique), Mathématique et Théâtre. Je suis allée dans un IUT MMI en spécialisant en développement web. Cette formation m'a permis de mieux comprendre la construction d'un site internet tout en découvrant les autres personnes qui englobent un développeur comme un graphiste, un maquetteur... </p>
-                    
-          <h3>💫 Forces principales</h3>
-          <ul>
-            <li>Vision transversale du processus de création</li>
-            <li>Capacité à unir besoins utilisateurs et contraintes techniques</li>
-            <li>Créativité nourrie par dessin, théâtre, escalade</li>
-            <li>Vision différentes des solutions du à mes multiples facettes</li>
-          </ul>
-        `
-      },
-      visual: {
-        title: '🎥 Création Visuelle & Audiovisuel',
-        content: `
-          <h3>Niveau de compétence : 65%</h3>
-          
-          <h3>🎬 Compétences principales</h3>
-          <ul>
-            <li><strong>Production vidéo</strong> : tournage, montage, post-production</li>
-            <li><strong>Motion design</strong> : animations, effets visuels</li>
-            <li><strong>Storytelling visuel</strong> : narratives impactantes</li>
-          </ul>
-          
-          <h3>🛠️ Outils maîtrisés</h3>
-          <p>Adobe Premiere Pro, After Effects, Photoshop, DaVinci Resolve</p>
-          
-          <h3>🚀 Applications au design d'expérience</h3>
-          <ul>
-            <li>Création de contenus immersifs pour XR/VR</li>
-            <li>Prototypage vidéo pour interfaces animées</li>
-            <li>Storytelling pour expériences utilisateur émotionnelles</li>
-          </ul>
-        `
-      },
       web: {
         title: '💻 Développement Web',
         content: `
-          <h3>Niveau de compétence : 75%</h3>
-          
-          <h3>⚙️ Technologies maîtrisées</h3>
-          <ul>
-            <li><strong>Front-end</strong> : HTML5, CSS3, JavaScript, React</li>
-            <li><strong>Frameworks</strong> : Responsive design, animations CSS</li>
-            <li><strong>Outils</strong> : Git, VS Code</li>
+          <h3>🎯 Ce que je sais faire</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 8px 0;">✅ <strong>Intégrer des maquettes Figma</strong> en HTML/CSS responsive et accessible</li>
+            <li style="padding: 8px 0;">✅ <strong>Créer des interfaces animées</strong> avec CSS et JavaScript (transitions, micro-interactions)</li>
+            <li style="padding: 8px 0;">✅ <strong>Développer des applications React</strong> avec gestion d'état et composants réutilisables</li>
+            <li style="padding: 8px 0;">✅ <strong>Optimiser les performances</strong> front-end (lazy loading, minification)</li>
+            <li style="padding: 8px 0;">✅ <strong>Versionner mon code</strong> avec Git et travailler en équipe</li>
           </ul>
-          
-          <h3>🎨 Spécialités</h3>
-          <ul>
-            <li>Intégration de maquettes Figma en code</li>
-            <li>Interfaces interactives et dynamiques</li>
-            <li>Optimisation performance et accessibilité</li>
+
+          <h3>🚧 Ce que j'apprends actuellement</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 8px 0;">🔄 <strong>Animations avancées</strong> avec GSAP et Framer Motion</li>
+            <li style="padding: 8px 0;">🔄 <strong>Progressive Web Apps</strong> (PWA) et optimisation mobile</li>
+            <li style="padding: 8px 0;">🔄 <strong>APIs et gestion de données</strong> asynchrones</li>
           </ul>
-          
-          <h3>🔮 Vision future</h3>
-          <ul>
-            <li>Je pourrais grâce à mon réaliser une maquette Figma à la porté des developpeurs</li>
-            <li>Je pourrais proposer des solutions à certains problèmes que peuvent confronter les développeurs</li>
-            <li>Je pourrais être force de proposition pour allié à la fois: utilité, ergonomie, optimisation, esthétique</li>
+
+          <h3>📈 Prochaines étapes</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 8px 0;">🎯 Approfondir <strong>Three.js</strong> pour les expériences 3D web</li>
+            <li style="padding: 8px 0;">🎯 Explorer <strong>WebGL</strong> et les shaders</li>
+            <li style="padding: 8px 0;">🎯 Me former au <strong>back-end</strong> (Node.js) pour devenir full-stack</li>
           </ul>
+
+          <h3>💡 Synergies avec mes autres compétences</h3>
+          <p style="background: rgba(168, 85, 247, 0.1); padding: 12px; border-radius: 8px; border-left: 3px solid #a855f7;">
+            <strong>Design + Dev :</strong> Je peux créer des prototypes fonctionnels directement en code, ce qui accélère les itérations et permet de tester rapidement des idées d'interface.<br><br>
+            <strong>Vidéo + Dev :</strong> J'intègre facilement des contenus vidéo dans mes interfaces avec des contrôles personnalisés et des animations synchronisées.
+          </p>
         `
       },
       ux: {
-        title: '🎨 UX Design & Figma',
+        title: '🎨 UX/UI Design',
         content: `
-          <h3>Niveau de compétence : 60%</h3>
-          
-          <h3>🎯 Compétences UX</h3>
-          <ul>
-            <li><strong>Research</strong> : personas, user journeys, interviews</li>
-            <li><strong>Design</strong> : wireframes, prototypes interactifs</li>
-            <li><strong>Testing</strong> : tests utilisateurs, itérations</li>
+          <h3>🎯 Ce que je sais faire</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 8px 0;">✅ <strong>Concevoir des wireframes et prototypes</strong> sur Figma avec composants et auto-layout</li>
+            <li style="padding: 8px 0;">✅ <strong>Créer des design systems</strong> cohérents et réutilisables</li>
+            <li style="padding: 8px 0;">✅ <strong>Définir des personas</strong> et user journeys basés sur la recherche</li>
+            <li style="padding: 8px 0;">✅ <strong>Conduire des tests utilisateurs</strong> et itérer sur les retours</li>
+            <li style="padding: 8px 0;">✅ <strong>Appliquer les principes d'ergonomie</strong> (lois de Fitts, Hick, gestalt)</li>
           </ul>
-          
-          <h3>🛠️ Maîtrise Figma</h3>
-          <ul>
-            <li>Systèmes de design et composants réutilisables</li>
-            <li>Prototypage avancé avec interactions</li>
+
+          <h3>🚧 Ce que j'apprends actuellement</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 8px 0;">🔄 <strong>Accessibilité (WCAG)</strong> et design inclusif</li>
+            <li style="padding: 8px 0;">🔄 <strong>Recherche UX approfondie</strong> (interviews, A/B testing)</li>
+            <li style="padding: 8px 0;">🔄 <strong>Design d'interfaces vocales</strong> et conversationnelles</li>
           </ul>
-          
-          <h3>📈 Axes de développement</h3>
-          <ul>
-            <li>Savoir collaborer avec une équipe</li>
-            <li>Savoir exprimer ses idées de manière claires et consices</li>
-            <li>Accessibilité et design inclusif</li>
+
+          <h3>📈 Prochaines étapes</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 8px 0;">🎯 Me spécialiser en <strong>Design d'expérience immersive</strong> (VR/AR)</li>
+            <li style="padding: 8px 0;">🎯 Approfondir le <strong>Design System Management</strong></li>
+            <li style="padding: 8px 0;">🎯 Explorer le <strong>Service Design</strong> et les parcours omnicanaux</li>
           </ul>
+
+          <h3>💡 Synergies avec mes autres compétences</h3>
+          <p style="background: rgba(16, 185, 129, 0.1); padding: 12px; border-radius: 8px; border-left: 3px solid #10b981;">
+            <strong>UX + Dev :</strong> Je conçois des interfaces réalisables techniquement, en tenant compte des contraintes de développement dès la phase de design.<br><br>
+            <strong>UX + Vidéo :</strong> J'intègre du storytelling visuel dans mes interfaces pour créer des expériences plus engageantes et émotionnelles.
+          </p>
+        `
+      },
+      visual: {
+        title: '🎥 Création Visuelle & Audiovisuelle',
+        content: `
+          <h3>🎯 Ce que je sais faire</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 8px 0;">✅ <strong>Monter des vidéos</strong> avec rythme narratif et étalonnage professionnel</li>
+            <li style="padding: 8px 0;">✅ <strong>Créer des animations</strong> et effets visuels pour vidéos et interfaces</li>
+            <li style="padding: 8px 0;">✅ <strong>Designer des visuels</strong> (identités, affiches, assets UI)</li>
+            <li style="padding: 8px 0;">✅ <strong>Dessiner à la main</strong> pour illustrer concepts et storyboards</li>
+            <li style="padding: 8px 0;">✅ <strong>Composer visuellement</strong> (cadrage, couleur, lumière)</li>
+          </ul>
+
+          <h3>🚧 Ce que j'apprends actuellement</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 8px 0;">🔄 <strong>Motion design avancé</strong> dans After Effects</li>
+            <li style="padding: 8px 0;">🔄 <strong>Animations 3D de base</strong> (Blender)</li>
+            <li style="padding: 8px 0;">🔄 <strong>Sound design</strong> pour enrichir mes créations</li>
+          </ul>
+
+          <h3>📈 Prochaines étapes</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 8px 0;">🎯 Me former à la <strong>vidéo 360° et VR</strong></li>
+            <li style="padding: 8px 0;">🎯 Explorer le <strong>mapping vidéo</strong> et les installations immersives</li>
+            <li style="padding: 8px 0;">🎯 Développer mes compétences en <strong>direction artistique</strong></li>
+          </ul>
+
+          <h3>💡 Synergies avec mes autres compétences</h3>
+          <p style="background: rgba(168, 85, 247, 0.1); padding: 12px; border-radius: 8px; border-left: 3px solid #a855f7;">
+            <strong>Vidéo + Web :</strong> Je crée des expériences web enrichies de contenus vidéo immersifs (parallax, scroll-driven animations).<br><br>
+            <strong>Vidéo + UX :</strong> J'utilise le storytelling visuel pour guider l'utilisateur et créer des prototypes vidéo d'interfaces animées.
+          </p>
         `
       },
       soft: {
-        title: '🪄 Soft Skills & Hobbies',
+        title: '🪄 Compétences Transversales',
         content: `
-          <h3>Niveau de compétence : 70%</h3>
-          
-          <h3>💡 Compétences transversales</h3>
-          <ul>
-            <li><strong>Communication</strong> : théâtre, présentation, vulgarisation</li>
-            <li><strong>Résolution de problèmes</strong> : approche analytique</li>
+          <h3>🎯 Ce que je sais faire</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 8px 0;">✅ <strong>Présenter mes projets</strong> de manière claire et engageante (grâce au théâtre)</li>
+            <li style="padding: 8px 0;">✅ <strong>Résoudre des problèmes complexes</strong> avec logique et créativité (NSI, escalade)</li>
+            <li style="padding: 8px 0;">✅ <strong>Travailler en autonomie</strong> et gérer mes priorités</li>
+            <li style="padding: 8px 0;">✅ <strong>Observer finement</strong> les détails visuels (dessin)</li>
+            <li style="padding: 8px 0;">✅ <strong>Persévérer face aux défis</strong> (escalade)</li>
           </ul>
-          
-          <h3>🎭 Hobbies enrichissants</h3>
-          <ul>
-            <li><strong>Dessin</strong> : développe l'observation et la créativité</li>
-            <li><strong>Théâtre</strong> : confiance en soi, empathie, storytelling</li>
-            <li><strong>Escalade</strong> : persévérance, gestion du stress</li>
+
+          <h3>🚧 Ce que je développe</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 8px 0;">🔄 <strong>Collaboration en équipe</strong> sur des projets complexes</li>
+            <li style="padding: 8px 0;">🔄 <strong>Gestion de projet</strong> (méthodologies agiles)</li>
+            <li style="padding: 8px 0;">🔄 <strong>Leadership créatif</strong> pour porter des visions de projet</li>
           </ul>
-          
-          <h3>🌟 Impact sur le design</h3>
-          <p>Ces compétences me permettent d'avoir une approche holistique du design, en comprenant les aspects humains, émotionnels et psychologiques de l'expérience utilisateur.</p>
-        `
-      },
-      objectives: {
-        title: '🚀 Objectifs',
-        content: `
-          <h3>Vision à 3-5 ans</h3>
-          <p>Devenir une designer d'expérience complète, capable de concevoir et de réaliser des projets immersifs mêlant créativité, interactivité.</p>
-          
-          <h3>🎯 Objectifs de développement</h3>
-          <ul>
-            <li><strong>Anglais professionnel (10%)</strong> : Mon plus gros point faible objectif atteindre un niveau B2 confirmé à la fin de mes études</li>
-            <li><strong>Design d'expérience & IA (40%)</strong> : 
-              <ul style="margin-left: 20px; margin-top: 8px;">
-                <li>Conception d'interfaces conversationnelles</li>
-                <li>Éthique et design responsable</li>
-              </ul>
-            </li>
-            <li><strong>Projets immersifs (50%)</strong> :
-              <ul style="margin-left: 20px; margin-top: 8px;">
-                <li>Expériences XR (réalité étendue)</li>
-                <li>Installations interactives audiovisuelles</li>
-                <li>Narrations transmédias</li>
-              </ul>
-            </li>
+
+          <h3>📈 Prochaines étapes</h3>
+          <ul style="list-style: none; padding: 0;">
+            <li style="padding: 8px 0;">🎯 Développer mon <strong>réseau professionnel</strong></li>
+            <li style="padding: 8px 0;">🎯 Améliorer ma <strong>gestion du temps</strong> sur projets multiples</li>
+            <li style="padding: 8px 0;">🎯 Renforcer ma <strong>capacité de négociation</strong></li>
           </ul>
-          
-          <h3>🌐 Positionnement sur les domaines émergents</h3>
-          <ul>
-            <li><strong>IA & Design génératif</strong> : opportunité de créer des outils de co-création</li>
-            <li><strong>Métavers & Web3</strong> : expériences immersives et communautés virtuelles</li>
-            <li><strong>Durabilité</strong> : éco-conception et design régénératif</li>
-          </ul>
-          
-          <h3>💎 Ma singularité</h3>
-          <p>Ma pile de compétences unique me permet de:</p>
-          <ul>
-            <li>Concevoir l'expérience (UX/UI)</li>
-            <li>La développer techniquement (Web)</li>
-            <li>La rendre visuellement impactante (Audiovisuel)</li>
-            <li>L'enrichir d'une dimension humaine (Soft Skills)</li>
-            <li>Communiquer à l'international (Anglais)</li>
-          </ul>
-          
-          <blockquote style="border-left: 3px solid var(--accent3); padding-left: 16px; margin: 20px 0; font-style: italic; color: #c4b5fd;">
-            « La combinaison unique de mes compétences me permet de me positionner à l'intersection de la créativité, de la technologie et de l'humain — là où naissent les expériences les plus mémorables. »
-          </blockquote>
+
+          <h3>💡 Impact sur mon profil global</h3>
+          <p style="background: rgba(245, 158, 11, 0.1); padding: 12px; border-radius: 8px; border-left: 3px solid #f59e0b;">
+            Ces compétences transversales enrichissent toutes mes pratiques :<br><br>
+            <strong>Théâtre →</strong> Communication projet, empathie utilisateur<br>
+            <strong>Dessin →</strong> Observation, composition visuelle<br>
+            <strong>Escalade →</strong> Persévérance, gestion du stress<br>
+            <strong>NSI →</strong> Pensée logique, résolution de problèmes
+          </p>
         `
       }
     };
 
-    // Modal functions
-    function openModal(type) {
+    // Open skill modal
+    function openSkillModal(skillId) {
       const modal = document.getElementById('modal');
       const body = document.getElementById('modal-body');
-      const content = modalContent[type];
+      const content = modalContent[skillId];
       
       body.innerHTML = `
         <div class="modal-header">${content.title}</div>
@@ -832,6 +1140,22 @@
       if (e.key === 'Escape') {
         closeModal();
       }
+    });
+
+    // Initialize
+    window.addEventListener('load', () => {
+      drawRadarChart();
+      createFlowNetwork();
+    });
+
+    // Recreate on resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        drawRadarChart();
+        createFlowNetwork();
+      }, 250);
     });
   </script>
 </body>
