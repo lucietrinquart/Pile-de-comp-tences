@@ -80,13 +80,25 @@
       padding: 24px;
       backdrop-filter: blur(12px);
       box-shadow: var(--shadow);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+      .card1 {
+      background: var(--glass);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 24px;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
       transition: all 0.3s ease;
       cursor: pointer;
       position: relative;
       overflow: hidden;
     }
 
-    .card:hover {
+    .card1:hover {
       transform: translateY(-5px);
       box-shadow: 0 0 60px rgba(124, 58, 237, 0.4);
       border-color: rgba(255, 255, 255, 0.15);
@@ -105,6 +117,22 @@
     }
 
     .card:hover::before {
+      opacity: 1;
+    }
+
+    .card1::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .card1:hover::before {
       opacity: 1;
     }
 
@@ -200,13 +228,9 @@
       border: 2px solid;
       border-radius: 16px;
       padding: 20px;
-      transition: all 0.3s ease;
     }
 
-    .synergy-simple-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    }
+
 
     .synergy-simple-header {
       display: flex;
@@ -593,7 +617,7 @@
     </div>
 
     <!-- Skill Detail Cards -->
-    <div class="card skill-detail" onclick="openSkillModal('web')">
+    <div class="card1 skill-detail" onclick="openSkillModal('web')">
       <h2 class="card-title">
         <span class="card-icon">💻</span>
         Développement Web
@@ -602,7 +626,7 @@
         <div class="skill-item" style="border-color: #06b6d4;">
           <div class="skill-item-header">
             <span class="skill-item-title">Intégration Front-End</span>
-            <span class="skill-level level-avance">Avancé</span>
+            <span class="skill-level level-expert">Expert</span>
           </div>
           <p class="skill-item-desc">Transformation de maquettes Figma en interfaces responsives et accessibles</p>
           <div class="skill-tags">
@@ -627,7 +651,7 @@
       </div>
     </div>
 
-    <div class="card skill-detail" onclick="openSkillModal('ux')">
+    <div class="card1 skill-detail" onclick="openSkillModal('ux')">
       <h2 class="card-title">
         <span class="card-icon">🎨</span>
         UX/UI Design
@@ -638,6 +662,7 @@
             <span class="skill-item-title">Conception d'interfaces</span>
             <span class="skill-level level-avance">Avancé</span>
           </div>
+        
           <p class="skill-item-desc">Design de wireframes, prototypes et maquettes haute-fidélité sur Figma</p>
           <div class="skill-tags">
             <span class="skill-tag">Figma</span>
@@ -649,7 +674,7 @@
         <div class="skill-item" style="border-color: #10b981;">
           <div class="skill-item-header">
             <span class="skill-item-title">Recherche Utilisateur</span>
-            <span class="skill-level level-intermediaire">Intermédiaire</span>
+            <span class="skill-level level-avance">Avancé</span>
           </div>
           <p class="skill-item-desc">Création de personas, user journeys et tests utilisateurs</p>
           <div class="skill-tags">
@@ -661,7 +686,7 @@
       </div>
     </div>
 
-    <div class="card skill-detail" onclick="openSkillModal('visual')">
+    <div class="card1 skill-detail" onclick="openSkillModal('visual')">
       <h2 class="card-title">
         <span class="card-icon">🎥</span>
         Création Visuelle & Audiovisuelle
@@ -670,7 +695,7 @@
         <div class="skill-item" style="border-color: #a855f7;">
           <div class="skill-item-header">
             <span class="skill-item-title">Montage Vidéo</span>
-            <span class="skill-level level-avance">Avancé</span>
+            <span class="skill-level level-initie">Initié</span>
           </div>
           <p class="skill-item-desc">Montage, étalonnage et post-production vidéo professionnelle</p>
           <div class="skill-tags">
@@ -694,7 +719,7 @@
       </div>
     </div>
 
-    <div class="card skill-detail" onclick="openSkillModal('soft')">
+    <div class="card1 skill-detail" onclick="openSkillModal('soft')">
       <h2 class="card-title">
         <span class="card-icon">🪄</span>
         Compétences Transversales
@@ -888,7 +913,7 @@
       }
     }
 
-    // ===== FLOW NETWORK - Schéma Simple et Clair =====
+    // ===== FLOW NETWORK - Schéma  =====
     function createFlowNetwork() {
       const container = document.getElementById('flowContainer');
       container.innerHTML = '';
@@ -968,104 +993,81 @@
       container.appendChild(grid);
     }
 
-    // ===== MODAL CONTENT =====
+    // ===== Mes cards =====
     const modalContent = {
       web: {
         title: '💻 Développement Web',
         content: `
-          <h3>🎯 Ce que je sais faire</h3>
+          <h3>Ce que je sais faire</h3>
           <ul style="list-style: none; padding: 0;">
-            <li style="padding: 8px 0;">✅ <strong>Intégrer des maquettes Figma</strong> en HTML/CSS responsive et accessible</li>
-            <li style="padding: 8px 0;">✅ <strong>Créer des interfaces animées</strong> avec CSS et JavaScript (transitions, micro-interactions)</li>
-            <li style="padding: 8px 0;">✅ <strong>Développer des applications React</strong> avec gestion d'état et composants réutilisables</li>
-            <li style="padding: 8px 0;">✅ <strong>Optimiser les performances</strong> front-end (lazy loading, minification)</li>
-            <li style="padding: 8px 0;">✅ <strong>Versionner mon code</strong> avec Git et travailler en équipe</li>
+            <li style="padding: 8px 0;"><strong>Intégrer des maquettes Figma</strong> en HTML/CSS responsive et accessible</li>
+            <li style="padding: 8px 0;"><strong>Créer des interfaces animées</strong> avec CSS et JavaScript (transitions, micro-interactions)</li>
+            <li style="padding: 8px 0;"><strong>Développer des applications React</strong> avec gestion d'état et composants réutilisables</li>
+            <li style="padding: 8px 0;"><strong>Multiplicité des languages et logiciels</strong>PHP framework (Laravel), SQL (MySql), React framework (Vite), Symphony, JavaScript framework (Angular), Python framework(Phaser)</li>
+            <li style="padding: 8px 0;"><strong>Versionner mon code</strong>Utilisation de GIthub dans des projets seuls ou en équipe via: Githib Desktop et Git Kraken</li>
           </ul>
 
-          <h3>🚧 Ce que j'apprends actuellement</h3>
+          <h3>Ce que j'apprends actuellement</h3>
           <ul style="list-style: none; padding: 0;">
-            <li style="padding: 8px 0;">🔄 <strong>Animations avancées</strong> avec GSAP et Framer Motion</li>
-            <li style="padding: 8px 0;">🔄 <strong>Progressive Web Apps</strong> (PWA) et optimisation mobile</li>
-            <li style="padding: 8px 0;">🔄 <strong>APIs et gestion de données</strong> asynchrones</li>
+            <li style="padding: 8px 0;"><strong>Approfondir</strong> pour les expériences 3D via Unity ou Unreal Engine</li>
+            <li style="padding: 8px 0;"><strong>Progressive Web Apps</strong> (PWA) et optimisation mobile</li>
+            <li style="padding: 8px 0;"><strong>APIs et gestion de données</strong> asynchrones</li>
           </ul>
 
-          <h3>📈 Prochaines étapes</h3>
-          <ul style="list-style: none; padding: 0;">
-            <li style="padding: 8px 0;">🎯 Approfondir <strong>Three.js</strong> pour les expériences 3D web</li>
-            <li style="padding: 8px 0;">🎯 Explorer <strong>WebGL</strong> et les shaders</li>
-            <li style="padding: 8px 0;">🎯 Me former au <strong>back-end</strong> (Node.js) pour devenir full-stack</li>
-          </ul>
-
-          <h3>💡 Synergies avec mes autres compétences</h3>
+          <h3>Synergies avec mes autres compétences</h3>
           <p style="background: rgba(168, 85, 247, 0.1); padding: 12px; border-radius: 8px; border-left: 3px solid #a855f7;">
             <strong>Design + Dev :</strong> Je peux créer des prototypes fonctionnels directement en code, ce qui accélère les itérations et permet de tester rapidement des idées d'interface.<br><br>
-            <strong>Vidéo + Dev :</strong> J'intègre facilement des contenus vidéo dans mes interfaces avec des contrôles personnalisés et des animations synchronisées.
+            <strong>UX/UI + Dev :</strong> J'intègre facilement des idées qui seront réalisables et explicables pour les développeurs.
           </p>
         `
       },
       ux: {
         title: '🎨 UX/UI Design',
         content: `
-          <h3>🎯 Ce que je sais faire</h3>
-          <ul style="list-style: none; padding: 0;">
-            <li style="padding: 8px 0;">✅ <strong>Concevoir des wireframes et prototypes</strong> sur Figma avec composants et auto-layout</li>
-            <li style="padding: 8px 0;">✅ <strong>Créer des design systems</strong> cohérents et réutilisables</li>
-            <li style="padding: 8px 0;">✅ <strong>Définir des personas</strong> et user journeys basés sur la recherche</li>
-            <li style="padding: 8px 0;">✅ <strong>Conduire des tests utilisateurs</strong> et itérer sur les retours</li>
-            <li style="padding: 8px 0;">✅ <strong>Appliquer les principes d'ergonomie</strong> (lois de Fitts, Hick, gestalt)</li>
+          <h3>Ce que je sais faire</h3>
+          <ul  style="list-style: none; padding: 0;">
+            <li style="padding: 8px 0;"><strong>Concevoir des wireframes et prototypes</strong> sur Figma avec composants et auto-layout</li>
+            <li style="padding: 8px 0;"><strong>Créer des design systems</strong> cohérents et réutilisables</li>
+            <li style="padding: 8px 0;"><strong>Définir des personas</strong> et user journeys basés sur la recherche</li>
+            <li style="padding: 8px 0;"><strong>Conduire des tests utilisateurs</strong> et itérer sur les retours</li>
           </ul>
 
-          <h3>🚧 Ce que j'apprends actuellement</h3>
+          <h3>Ce que j'apprends actuellement</h3>
           <ul style="list-style: none; padding: 0;">
-            <li style="padding: 8px 0;">🔄 <strong>Accessibilité (WCAG)</strong> et design inclusif</li>
-            <li style="padding: 8px 0;">🔄 <strong>Recherche UX approfondie</strong> (interviews, A/B testing)</li>
-            <li style="padding: 8px 0;">🔄 <strong>Design d'interfaces vocales</strong> et conversationnelles</li>
+            <li style="padding: 8px 0;"><strong>Accessibilité (WCAG)</strong> et design inclusif</li>
+            <li style="padding: 8px 0;"><strong>Recherche UX approfondie</strong> (interviews, tests utilisateurs)</li>
           </ul>
 
-          <h3>📈 Prochaines étapes</h3>
-          <ul style="list-style: none; padding: 0;">
-            <li style="padding: 8px 0;">🎯 Me spécialiser en <strong>Design d'expérience immersive</strong> (VR/AR)</li>
-            <li style="padding: 8px 0;">🎯 Approfondir le <strong>Design System Management</strong></li>
-            <li style="padding: 8px 0;">🎯 Explorer le <strong>Service Design</strong> et les parcours omnicanaux</li>
-          </ul>
-
-          <h3>💡 Synergies avec mes autres compétences</h3>
+          <h3>Synergies avec mes autres compétences</h3>
           <p style="background: rgba(16, 185, 129, 0.1); padding: 12px; border-radius: 8px; border-left: 3px solid #10b981;">
             <strong>UX + Dev :</strong> Je conçois des interfaces réalisables techniquement, en tenant compte des contraintes de développement dès la phase de design.<br><br>
-            <strong>UX + Vidéo :</strong> J'intègre du storytelling visuel dans mes interfaces pour créer des expériences plus engageantes et émotionnelles.
+            <strong>UX + Graphique :</strong> J'intègre du storytelling visuel dans mes interfaces pour créer des expériences plus engageantes et émotionnelles.
           </p>
         `
       },
       visual: {
         title: '🎥 Création Visuelle & Audiovisuelle',
         content: `
-          <h3>🎯 Ce que je sais faire</h3>
+          <h3>Ce que je sais faire</h3>
           <ul style="list-style: none; padding: 0;">
-            <li style="padding: 8px 0;">✅ <strong>Monter des vidéos</strong> avec rythme narratif et étalonnage professionnel</li>
-            <li style="padding: 8px 0;">✅ <strong>Créer des animations</strong> et effets visuels pour vidéos et interfaces</li>
-            <li style="padding: 8px 0;">✅ <strong>Designer des visuels</strong> (identités, affiches, assets UI)</li>
-            <li style="padding: 8px 0;">✅ <strong>Dessiner à la main</strong> pour illustrer concepts et storyboards</li>
-            <li style="padding: 8px 0;">✅ <strong>Composer visuellement</strong> (cadrage, couleur, lumière)</li>
+            <li style="padding: 8px 0;"><strong>Monter des vidéos</strong> avec rythme narratif et étalonnage professionnel</li>
+            <li style="padding: 8px 0;"><strong>Créer des animations 2D</strong> via différents logiciels comme Adobe Animate</li>
+            <li style="padding: 8px 0;"><strong>Designer des visuels</strong> (identités, affiches, assets UI)</li>
+            <li style="padding: 8px 0;"><strong>Dessiner à la main</strong> pour illustrer concepts et storyboards</li>
+            <li style="padding: 8px 0;"><strong>Composer visuellement</strong> (cadrage, couleur, lumière)</li>
           </ul>
 
           <h3>🚧 Ce que j'apprends actuellement</h3>
           <ul style="list-style: none; padding: 0;">
-            <li style="padding: 8px 0;">🔄 <strong>Motion design avancé</strong> dans After Effects</li>
-            <li style="padding: 8px 0;">🔄 <strong>Animations 3D de base</strong> (Blender)</li>
-            <li style="padding: 8px 0;">🔄 <strong>Sound design</strong> pour enrichir mes créations</li>
+            <li style="padding: 8px 0;"><strong>Motion design avancé</strong> dans After Effects</li>
+            <li style="padding: 8px 0;"><strong>Animations 2D plus développer</strong>Faire des animations plus fluides</li>
+            <li style="padding: 8px 0;"> Développer mes compétences en <strong>direction artistique</strong></li>
           </ul>
 
-          <h3>📈 Prochaines étapes</h3>
-          <ul style="list-style: none; padding: 0;">
-            <li style="padding: 8px 0;">🎯 Me former à la <strong>vidéo 360° et VR</strong></li>
-            <li style="padding: 8px 0;">🎯 Explorer le <strong>mapping vidéo</strong> et les installations immersives</li>
-            <li style="padding: 8px 0;">🎯 Développer mes compétences en <strong>direction artistique</strong></li>
-          </ul>
-
-          <h3>💡 Synergies avec mes autres compétences</h3>
+          <h3>Synergies avec mes autres compétences</h3>
           <p style="background: rgba(168, 85, 247, 0.1); padding: 12px; border-radius: 8px; border-left: 3px solid #a855f7;">
             <strong>Vidéo + Web :</strong> Je crée des expériences web enrichies de contenus vidéo immersifs (parallax, scroll-driven animations).<br><br>
-            <strong>Vidéo + UX :</strong> J'utilise le storytelling visuel pour guider l'utilisateur et créer des prototypes vidéo d'interfaces animées.
+            <strong>Vidéo + UX :</strong> J'utilise le storytelling visuel pour guider l'utilisateur et créer des prototypes d'interfaces animées.
           </p>
         `
       },
